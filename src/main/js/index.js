@@ -3,6 +3,7 @@ export let todos = [];
 
 export class Todo{
     constructor(element, index){
+        this.id = null;
         this.index = index;
         this.element = element;
         this.isComplete = false;
@@ -57,19 +58,46 @@ export class Todo{
 //let todo = new Todo(todos[0],0);
 
 export function todoClick(index){
-    let todo = todos[index];
-    if(todo.isComplete == true){
-        todo.isComplete = false;
+    let todo = document.getElementsByClassName('todo')[index];
+    let id = todo.dataset.id;
+    let taskName = todo.dataset.text;
+    let isComplete = todo.dataset.status;
+    if(isComplete == "complete"){
+        isComplete = false;
     } else {
-        todo.isComplete = true;
+        isComplete = true;
     }
 
-    todo.addHTML();
+    fetch('/api/todos/' + id, {
+        method: 'PUT',
+        body: JSON.stringify({
+            task: taskName,
+            completed:isComplete
+        }),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+    })
+        .then((response) => response.json())
+        .then((json) => {
+            readAllTodos();
+        })
+
 }
 
 export function deleteTodo(index){
-    let todo = todos[index];
-    todo.element.remove();
+
+    let td = document.getElementsByClassName('todo')[index];
+    // todo.element.remove();
+    let id = td.dataset.id;
+
+    fetch('/api/todos/' + id, {
+        method: 'DELETE',
+    })
+    .then((response) => response.json())
+    .then((json) => {
+        readAllTodos();
+    })
 }
 
 export function createTodos(){
@@ -80,10 +108,11 @@ export function createTodos(){
     }
 }
 
-export function addTodo(text){
+export function addTodo(text, id, completed){
     let newTodo = document.createElement("li");
     newTodo.classList.add("todo");
-    newTodo.dataset.status = "incomplete";
+    newTodo.dataset.id = id;
+    newTodo.dataset.status = (completed) ? "complete" : "incomplete";
     newTodo.dataset.text = text;
     document.getElementById('todos').appendChild(newTodo);
     createTodos()
@@ -91,8 +120,41 @@ export function addTodo(text){
 
 export function newTodo(){
     let todoForm =document.getElementById('todoInput');
-    addTodo(todoForm.value);
+    let taskName = todoForm.value;
     todoForm.value = "";
+
+    fetch('/api/todos/add', {
+        method: 'POST',
+        body: JSON.stringify({
+            task: taskName,
+            completed:false
+        }),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+    })
+        .then((response) => response.json())
+        .then((json) => {
+            readAllTodos();
+        })
+}
+
+export function readAllTodos(){
+    // Clear all todos
+    document.getElementById('todos').innerHTML = "";
+    todos = [];
+
+    fetch('/api/todos')
+        .then(response => response.json())
+        .then(json => {
+            
+            json.forEach((td) => {
+                addTodo(td.task,td.id,td.completed);
+            })
+        
+        })
+
 }
 
 createTodos();
+readAllTodos()
