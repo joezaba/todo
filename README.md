@@ -3,5 +3,5 @@
 
 
 ## Install
-git clone
-npm install
+### git clone
+### npm install
