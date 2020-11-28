@@ -3,5 +3,5 @@
 
 
 ## Install
-### git clone
+### git clone https://github.com/joezaba/todo.git
 ### npm install
