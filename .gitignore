@@ -35,3 +35,6 @@ build/
 
 ### NPM ###
 node_modules
+
+### H2 ###
+data
