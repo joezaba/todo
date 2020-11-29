@@ -5,7 +5,6 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'src/main/resources/static'),
-    library: 'todoLib',
   },
   optimization: {
     // We no not want to minimize our code.
