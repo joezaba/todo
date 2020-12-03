@@ -2,7 +2,7 @@
   <li class="list-group-item d-flex justify-content-between align-items-center">
     <span style="cursor: pointer">
       <svg
-        v-if="!isComplete"
+        v-if="!todo.completed"
         v-on:click="toggleComplete()"
         width="1.5em"
         height="1.5em"
@@ -17,7 +17,7 @@
         />
       </svg>
       <svg
-        v-if="isComplete"
+        v-if="todo.completed"
         v-on:click="toggleComplete()"
         width="1.5em"
         height="1.5em"
@@ -36,11 +36,11 @@
         />
       </svg>
 
-      <span v-bind:class="{ todo_text_is_complete: isComplete }">{{
-        text
+      <span v-bind:class="{ todo_text_is_complete: todo.completed }">{{
+        todo.task
       }}</span>
     </span>
-    <span id="delete-x" style="cursor: pointer">
+    <span v-on:click="deleteThisTodo" style="cursor: pointer">
       <svg
         width="2em"
         height="2em"
@@ -59,16 +59,31 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Todo",
-  props: ["text", "isComplete"],
+  props: ["id"],
   data: () => {
-    return {};
+    return {
+      todo: {},
+    };
   },
+  computed: mapGetters(["allTodos"]),
   methods: {
+    ...mapActions(["updateTodo", "deleteTodo"]),
     toggleComplete() {
-      this.isComplete = !this.isComplete;
+      this.todo.completed = !this.todo.completed;
+      this.updateTodo(this.todo);
     },
+    getTodo() {
+      return this.allTodos.find((td) => td.id === this.id);
+    },
+    deleteThisTodo() {
+        this.deleteTodo(this.todo.id);
+    }
+  },
+  created() {
+    this.todo = this.getTodo();
   },
 };
 </script>
