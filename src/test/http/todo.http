@@ -1,13 +1,15 @@
-http://localhost:8081/api/todos/1
+GET http://localhost:8081/api/todos/ HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqemFiYTEwIiwiZXhwIjoxNjA3MjI1NTczLCJpYXQiOjE2MDcxODk1NzN9.dIqvP6-fD3IJibJGWVdLgYv7SgvtTYA-rJWBYOxxSUo
 
 ###
 
 POST http://localhost:8081/api/todos/add HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmb28iLCJleHAiOjE2MDcxNjcwNjAsImlhdCI6MTYwNzEzMTA2MH0.zSBFHtx7mKKaT81adMHWPC98Ux3TYHO-gUnVHW7fJao
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqemFiYTEwIiwiZXhwIjoxNjA3MjI1NTczLCJpYXQiOjE2MDcxODk1NzN9.dIqvP6-fD3IJibJGWVdLgYv7SgvtTYA-rJWBYOxxSUo
 
 {
-    "task": "Cook Dinner",
+    "task": "Eat Dinner",
     "completed": false
 }
 

@@ -1,4 +1,4 @@
-package io.zaba.todo.util;
+package io.zaba.todo.security;
 
 
 import io.jsonwebtoken.Claims;

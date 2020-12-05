@@ -1,4 +1,4 @@
-package io.zaba.todo.filters;
+package io.zaba.todo.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -7,9 +7,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-
-import io.zaba.todo.security.MyUserDetailsService;
-import io.zaba.todo.util.JwtUtil;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;

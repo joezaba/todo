@@ -1,10 +1,13 @@
-package io.zaba.todo.models;
+package io.zaba.todo.dtos;
 
 import java.io.Serializable;
 
+import org.springframework.security.core.SpringSecurityCoreVersion;
+
 public class AuthenticationRequest implements Serializable {
 
-
+    private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
+    
     private String username;
     private String password;
 

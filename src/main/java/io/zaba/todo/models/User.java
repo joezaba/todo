@@ -1,5 +1,7 @@
+
 package io.zaba.todo.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,11 +9,12 @@ import javax.persistence.Id;
 
 @Entity
 public class User {
-    
+
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Column(unique = true, nullable = false)
     private String username;
 
     private String password;
@@ -21,6 +24,11 @@ public class User {
 
     public User(Integer id, String username, String password) {
         this.id = id;
+        this.username = username;
+        this.password = password;
+    }
+
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
@@ -63,6 +71,5 @@ public class User {
         this.password = password;
         return this;
     }
-    
 
 }
