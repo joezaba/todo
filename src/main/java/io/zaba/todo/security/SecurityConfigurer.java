@@ -16,36 +16,41 @@ import io.zaba.todo.filters.JwtRequestFilter;
 
 @EnableWebSecurity
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private MyUserDetailsService myUserDetailsService;
+  @Autowired
+  private MyUserDetailsService myUserDetailsService;
 
-    @Autowired
-    private JwtRequestFilter jwtRequestFilter;
+  @Autowired
+  private JwtRequestFilter jwtRequestFilter;
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		  auth.userDetailsService(myUserDetailsService);
-    }
-    
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return NoOpPasswordEncoder.getInstance();
-    }
+  @Override
+  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    auth.userDetailsService(myUserDetailsService);
+  }
 
-    @Override
-    @Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-      return super.authenticationManagerBean();
-    }
-  
-    @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
-      httpSecurity.csrf().disable()
-          .authorizeRequests().antMatchers("/authenticate").permitAll().
-              anyRequest().authenticated().and().
-              exceptionHandling().and().sessionManagement()
-          .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-      httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-  
-    }
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return NoOpPasswordEncoder.getInstance();
+  }
+
+  @Override
+  @Bean
+  public AuthenticationManager authenticationManagerBean() throws Exception {
+    return super.authenticationManagerBean();
+  }
+
+  @Override
+  protected void configure(HttpSecurity httpSecurity) throws Exception {
+    httpSecurity.csrf().disable().authorizeRequests()
+        .antMatchers("/").permitAll()
+        .antMatchers("/js/app.js").permitAll() 
+        .antMatchers("/js/chunk-vendors.js").permitAll()
+        .antMatchers("/api/**").permitAll()
+        .antMatchers("/favicon.ico").permitAll()
+        .antMatchers("/authenticate").permitAll()
+        .anyRequest().authenticated()
+        .and().exceptionHandling().and().sessionManagement()
+        .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+
+  }
 }
