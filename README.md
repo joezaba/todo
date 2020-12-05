@@ -11,3 +11,6 @@ npm install
 
 ## Build Frontend with Webpack
 npm run build
+
+
+## https://youtu.be/X80nJ5T7YpE?t=1714

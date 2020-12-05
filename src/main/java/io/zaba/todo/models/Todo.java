@@ -1,4 +1,4 @@
-package io.zaba.todo;
+package io.zaba.todo.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

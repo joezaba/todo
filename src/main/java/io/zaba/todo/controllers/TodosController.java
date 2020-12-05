@@ -1,4 +1,7 @@
-package io.zaba.todo;
+package io.zaba.todo.controllers;
+
+import io.zaba.todo.models.Todo;
+import io.zaba.todo.repositories.TodoRepository;
 
 import java.util.Optional;
 
