@@ -1,4 +1,5 @@
 import axios from 'axios';
+import user from './user';
 
 const state = {
   todos: []
@@ -11,7 +12,12 @@ const getters = {
 const actions = {
   async fetchTodos({ commit }) {
     const response = await axios.get(
-      '/api/todos'
+      '/api/todos',
+      {
+        headers: {
+          Authorization: 'Bearer ' + user.state.jwt
+        }
+      }
     );
 
     commit('setTodos', response.data);
@@ -19,20 +25,36 @@ const actions = {
   async addTodo({ commit }, task) {
     const response = await axios.post(
       '/api/todos/add',
-      { task, completed: false }
+      { task, completed: false },
+      {
+        headers: {
+          Authorization: 'Bearer ' + user.state.jwt
+        }
+      }
     );
 
     commit('newTodo', response.data);
   },
   async deleteTodo({ commit }, id) {
-    await axios.delete(`/api/todos/${id}`);
+    await axios.delete(`/api/todos/${id}`,
+      {
+        headers: {
+          Authorization: 'Bearer ' + user.state.jwt
+        }
+      }
+    );
 
     commit('removeTodo', id);
   },
   async updateTodo({ commit }, updTodo) {
     const response = await axios.put(
       `/api/todos/${updTodo.id}`,
-      updTodo
+      updTodo,
+      {
+        headers: {
+          Authorization: 'Bearer ' + user.state.jwt
+        }
+      }
     );
 
     commit('updateTodo', response.data);

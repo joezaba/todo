@@ -3,7 +3,7 @@ POST http://localhost:8081/api/users/authenticate HTTP/1.1
 content-type: application/json
 
 {
-    "username": "jzaba10",
+    "username": "jzaba8",
     "password": "12345"
 }
 
@@ -17,3 +17,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqemFiYTEwIiwiZXhwIjoxNjA3M
     "username": "jzaba19",
     "password": "12345"
 }
+
+###
+
+GET  http://localhost:8081/api/users/jwt HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqemFiYTEwIiwiZXhwIjoxNjA3MjI1NTczLCJpYXQiOjE2MDcxODk1NzN9.dIqvP6-fD3IJibJGWVdLgYv7SgvtTYA-rJWBYOxxSUo
