@@ -28,6 +28,11 @@ public class TodosController {
         return todoRepository.findAll();
     }
 
+    @GetMapping("/user/{userId}")
+    public @ResponseBody Iterable<Todo> getByUserId(@PathVariable("userId") Integer userId) {
+        return todoRepository.findByUserId(userId);
+    }
+
     @GetMapping("/{id}")
     public @ResponseBody Optional<Todo> getContact(@PathVariable("id") Integer id)
     {

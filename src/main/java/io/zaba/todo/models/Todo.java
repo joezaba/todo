@@ -18,6 +18,16 @@ public class Todo {
 
     private Boolean completed;
 
+    private Integer userId;
+
+    
+    public Integer getUserId() {
+        return this.userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public Integer getId() {
         return this.id;

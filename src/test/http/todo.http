@@ -4,6 +4,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqemFiYTEwIiwiZXhwIjoxNjA3M
 
 ###
 
+GET http://localhost:8081/api/todos/user/1 HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqemFiYTgiLCJleHAiOjE2MDcyNjMwMzksImlhdCI6MTYwNzIyNzAzOX0.lr7DdeURNgK-H1adnT1x7TcXxs4e4COwxFh1Jyuz-_A
+
+###
+
 POST http://localhost:8081/api/todos/add HTTP/1.1
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqemFiYTEwIiwiZXhwIjoxNjA3MjI1NTczLCJpYXQiOjE2MDcxODk1NzN9.dIqvP6-fD3IJibJGWVdLgYv7SgvtTYA-rJWBYOxxSUo

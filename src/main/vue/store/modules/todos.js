@@ -12,7 +12,7 @@ const getters = {
 const actions = {
   async fetchTodos({ commit }) {
     const response = await axios.get(
-      '/api/todos',
+      '/api/todos/user/' + user.state.id,
       {
         headers: {
           Authorization: 'Bearer ' + user.state.jwt
@@ -25,7 +25,7 @@ const actions = {
   async addTodo({ commit }, task) {
     const response = await axios.post(
       '/api/todos/add',
-      { task, completed: false },
+      { task, completed: false, userId : user.state.id },
       {
         headers: {
           Authorization: 'Bearer ' + user.state.jwt

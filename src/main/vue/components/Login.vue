@@ -1,6 +1,9 @@
 <template>
-  <div class="container mt-5">
-      <h1>Todo Login</h1>
+  <div class="container mt-3">
+    <div class="text-right font-weight-bold" v-on:click="toggleRegistration()">
+      <a type="button" class="pull-right"><span v-if="!registration">Register</span><span v-if="registration">Login</span></a>
+    </div>
+    <h1>Todo <span v-if="registration">Registration</span><span v-if="!registration">Login</span></h1>
     <form v-on:submit="onSubmit">
       <div class="form-group">
         <label for="InputUsername">Username</label>
@@ -14,7 +17,12 @@
       </div>
       <div class="form-group">
         <label for="InputPassword">Password</label>
-        <input type="password" class="form-control" id="InputPassword" v-model="userIn.password" />
+        <input
+          type="password"
+          class="form-control"
+          id="InputPassword"
+          v-model="userIn.password"
+        />
       </div>
       <!--
     <div class="form-group form-check">
@@ -22,7 +30,8 @@
         <label class="form-check-label" for="exampleCheck1">Check me out</label>
     </div>
     -->
-      <button type="submit" class="btn btn-primary">Login</button>
+      <button v-if="!registration" type="submit" class="btn btn-primary">Login</button>
+      <button v-if="registration" @click="registerUser()" type="button" class="btn btn-primary">Register</button>
     </form>
   </div>
 </template>
@@ -33,18 +42,26 @@ export default {
   name: "Login",
   data: () => {
     return {
-        userIn : {
-            username : "",
-            password : ""
-        }
+      registration: false,
+      userIn: {
+        username: "",
+        password: "",
+      },
     };
   },
   methods: {
-      ...mapActions(["authenticateUser"]),
-      onSubmit(e) {
-          e.preventDefault()
-          this.authenticateUser(this.userIn);
-      }
+    ...mapActions(["authenticateUser", "register"]),
+    onSubmit(e) {
+      e.preventDefault();
+      this.authenticateUser(this.userIn);
+    },
+    registerUser(){
+      this.register(this.userIn);
+      this.registration = false;
+    },
+    toggleRegistration(){
+        this.registration = !this.registration;
+    }
   },
   created() {},
 };

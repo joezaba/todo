@@ -45,6 +45,21 @@ const actions = {
               )
     },
 
+    async register( {commit}, userIn ){
+        const body = {
+            "username" : userIn.username,
+            "password" : userIn.password
+        }
+        console.log(body)
+
+        await axios.post(
+            '/api/users/register',
+            body
+          );
+
+          commit()
+    },
+
     logout({commit}){
         localStorage.removeItem('jwt');
         commit('removeUser')

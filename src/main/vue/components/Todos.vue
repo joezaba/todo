@@ -1,7 +1,11 @@
 <template>
-  <div class="todoList">
+  <div class="container mt-3 todoList">
+    <div class="text-right font-weight-bold">
+      <span>Signed in as {{currentUser.username}}  | </span>
+      <a @click="logout" type="button" class="pull-right">Logout</a>
+    </div>
+    
     <h1>My Tasks</h1>
-        <button @click="logout" type="button" class="btn btn-link">Logout</button>
     <ul id="todos" class="list-group list-group-flush">
       <Todo v-for="todo in allTodos" :key="todo.id" :id="todo.id" />
       <AddTodoFAB />
@@ -23,7 +27,7 @@ export default {
     AddTodoFAB,
     AddTodoModal,
   },
-  computed: mapGetters(["allTodos"]),
+  computed: mapGetters(["allTodos", "currentUser"]),
   methods: {
     ...mapActions(["fetchTodos", "logout"]),
   },

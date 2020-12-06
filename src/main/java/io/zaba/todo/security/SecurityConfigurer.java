@@ -28,6 +28,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
         .antMatchers("/js/chunk-vendors.js").permitAll()
         .antMatchers("/favicon.ico").permitAll()
         .antMatchers("/api/users/authenticate").permitAll()
+        .antMatchers("/api/users/register").permitAll()
         .antMatchers("/h2/**").permitAll()
         //.antMatchers("/api/**").permitAll()
         .anyRequest().authenticated()
